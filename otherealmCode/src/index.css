@@ -4,7 +4,7 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Comfortaa';
   line-height: 1.5;
   font-weight: 400;
 
@@ -42,6 +42,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  
   /* overflow-x: hidden; */
 }
 
@@ -113,6 +114,9 @@ button:focus-visible {
 .itemCardContent:hover p {
   filter: brightness(100%);
 }
+
+
+
 
 .itemCardImg{
   border: 2px solid transparent;

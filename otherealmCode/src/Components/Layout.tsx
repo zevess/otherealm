@@ -1,28 +1,21 @@
 import { ThemeProvider } from "@mui/material"
-
-import { createTheme } from '@mui/material/styles'
 import { FranchiseCard } from "./Cards/FranchiseCard"
 import { Welcome } from "./RegistrationPage/Welcome"
 import { HeaderLogin } from "./RegistrationPage/HeaderLogin"
 import { RegistrationWrapper } from "./RegistrationPage/RegistrationWrapper"
 import { Profile } from "./Profile/Profile"
-import { SectionButton } from "./Cards/SectionButton"
 import { ItemCard } from "./Cards/ItemCard"
 import { ListWindow } from "./Profile/ListWindow"
+import { ItemWindows } from "./ItemsWindows/ItemWindow"
+import { layoutTheme } from "../assets/theme"
+import { FranchiseWindow } from "./FranchiseWindow/FranchiseWindow"
+import { Search } from "./Search/Search"
 
-const theme = createTheme({
-    typography: {
-        fontFamily: 'Comfortaa',
-        allVariants: {
-            color: 'black'
-        }
-    },
 
-})
 
 export const Layout = () => {
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={layoutTheme}>
             <HeaderLogin />
             {/* <ListWindow/> */}
 
@@ -31,6 +24,9 @@ export const Layout = () => {
             {/* <RegistrationWrapper/> */}
 
             <Profile/>    
+            {/* <ItemWindows /> */}
+            {/* <FranchiseWindow/> */}
+            <Search/>
         </ThemeProvider>
     )
 }
