@@ -1,19 +1,13 @@
 import { Box } from "@mui/material"
 import { Header } from "../Header"
+import { Link } from "react-router-dom"
 
 export const HeaderLogin = () => {
     return (
         <Header>
-            <a href="">
-                инфо
-            </a>
-            
+            <Link to={"/search"}>поиск</Link>
             <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box>
-            
-            <a href="">
-                вход
-            </a>
-            
+            <Link to={"/profile"}>профиль</Link>
         </Header>
     )
 }

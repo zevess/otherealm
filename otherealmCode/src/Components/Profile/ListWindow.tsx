@@ -1,33 +1,42 @@
 import { Box } from "@mui/material"
 import { ItemCard } from "../Cards/ItemCard"
-import {  SectionToggle } from "../SectionToggle"
-import { ItemTypeToggle } from "./ItemTypeToggle"
+import React, { FC } from "react"
+import { ItemTypeToggleGroup } from "../Toggles/ItemTypeToggleGroup"
+import { divideItems, itemTypes } from "../../utils/itemTypes"
+import { DivideToggleGroup } from "../Toggles/DivideToggleGroup"
+import { handleChange } from "../../utils/handleChange"
 
-export const ListWindow = () => {
+interface ListWindowProps{
+    type: string,
+    divide: string,
+    setType: React.Dispatch<React.SetStateAction<string>>,
+    setDivide: React.Dispatch<React.SetStateAction<string>>,
+}
+
+export const ListWindow: FC<ListWindowProps> = ({type, divide, setType, setDivide}) => {
+
     return (
         <Box sx={{ width: '1300px', maxWidth: '1300px', minHeight: '500px', backgroundColor: 'white', borderRadius: '24px', border: 'solid 1px black' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-evenly', padding: '12px' }}>
-                
-                <ItemTypeToggle children={"все"} onClick={() => console.log('w')} />
-                <ItemTypeToggle children={"фильмы"} onClick={() => console.log('w')} />
+
+                <ItemTypeToggleGroup items={itemTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setType)} alignment={type} />
+
             </Box>
-            <div style={{display:"flex"}}>
+            <div style={{ display: "flex" }}>
                 <div className="listItems" style={{ display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap', marginLeft: '40px' }}>
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и МортиРик и МортиРик и МортиРик и МортиРик и МортиРик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\image 1.png" itemType="франшиза" itemTitle="Рик и Морти" />
-                    <ItemCard itemPoster="src\assets\img\Wizarding_World_logo.svg.png" itemType="франшиза" itemTitle="Wizarding World" />
+                    <ItemCard id={1} itemPoster="https://static.hdrezka.ac/i/2020/11/16/m8bb33cfc1690we80w25c.jpeg" itemType="фильм" itemTitle="Гарри Поттер и узник Азкабана" />
+                    <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                    <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                    <ItemCard id={1}  itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                    <ItemCard id={1}  itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и МортиРик и МортиРик и МортиРик и МортиРик и МортиРик и Морти" />
+                    <ItemCard id={1}  itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                    <ItemCard id={1}  itemPoster="src\assets\img\image 1.png" itemType="франшиза" itemTitle="Рик и Морти" />
+                    
+
                 </div>
-                <div style={{display: 'flex', flexDirection: 'column', margin: '20px'}}>
-                    <SectionToggle children={"буду смотреть"} onClick={() => console.log('w')}/>
-                    <SectionToggle children={"раздел 2"} onClick={() => console.log('w')}/>
-                    <SectionToggle children={"раздел 3"} onClick={() => console.log('w')}/>
-                </div>
+                <DivideToggleGroup items={divideItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setDivide)} alignment={divide}/>
             </div>
         </Box>
     )
 }
+

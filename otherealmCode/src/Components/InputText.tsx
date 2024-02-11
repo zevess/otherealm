@@ -8,10 +8,12 @@ export const inputStyles = {
 
 interface InputTextProps {
     placeholder: string,
-    sx: object
+    sx: object,
+    setText: React.Dispatch<React.SetStateAction<string>>,
+    onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const InputText: FC<InputTextProps> = ({placeholder, sx}) => {
+export const InputText: FC<InputTextProps> = ({placeholder, sx, setText, onClick}) => {
     return (
         <TextField variant="outlined" multiline maxRows={2} placeholder={placeholder} sx={sx} inputProps={{
             style: {
@@ -23,11 +25,13 @@ export const InputText: FC<InputTextProps> = ({placeholder, sx}) => {
             },
             endAdornment: (
                 <InputAdornment position="end">
-                    <IconButton color="primary">
+                    <IconButton color="primary" onClick={onClick}>
                         <SendIcon sx={{ width: '50px', height: '50px' }} />
                     </IconButton>
                 </InputAdornment>
             )
+        }} onChange={(event) =>{
+            setText(event.target.value)
         }}></TextField>
     )
 }

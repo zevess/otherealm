@@ -13,13 +13,13 @@ export const FranchiseInfo = () => {
 
             <Typography variant="h4" textAlign={'left'}>связанное:</Typography>
 
-            <Box display={'flex'} flexWrap={'wrap'} >
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
-                <ItemCard itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+            <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
+                <ItemCard id={1} itemPoster="https://static.hdrezka.ac/i/2020/11/16/m8bb33cfc1690we80w25c.jpeg" itemType="фильм" itemTitle="Гарри Поттер и узник Азкабана" />
+                <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
+                <ItemCard id={1} itemPoster="https://static.hdrezka.ac/i/2020/11/16/m8bb33cfc1690we80w25c.jpeg" itemType="фильм" itemTitle="Гарри Поттер и узник Азкабана" />
+                <ItemCard id={1} itemPoster="src\assets\img\image 1.png" itemType="мультфильм" itemTitle="Рик и Морти" />
             </Box>
         </Box>
     )

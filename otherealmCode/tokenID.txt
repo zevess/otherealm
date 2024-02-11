@@ -1,0 +1,5 @@
+eh3mw096f6d9njuykpzb1yxyv6jdjm - Client ID
+9wlnyzza1p6cal8r1h5ievmga5mt7m - Secret ID
+"ukoaf6afcx87xrp2el5paufpxaaco3" - access token
+
+"qxxflwnkosts4wp6hpxkh9vz5imlxi"

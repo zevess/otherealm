@@ -1,7 +1,7 @@
-import { DiscussWindow } from "../ItemsWindows/DiscussWindow/DiscussWindow"
+import { DiscussSection } from "../ItemsWindows/DiscussWindow/DiscussSection"
 
 export const FranchiseDiscuss = () => {
     return(
-        <DiscussWindow/>
+        <DiscussSection/>
     )
 }
