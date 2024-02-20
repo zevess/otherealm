@@ -3,7 +3,7 @@ import { FC } from "react"
 
 interface ItemTitleProps{
     title: string,
-    originalTitle: string
+    originalTitle?: string
 }
 
 export const ItemTitle:FC<ItemTitleProps> = ({title, originalTitle}) => {

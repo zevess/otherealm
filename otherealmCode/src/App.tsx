@@ -9,13 +9,23 @@ import { FranchiseWindow } from './Components/FranchiseWindow/FranchiseWindow'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
+import { GameWindow } from './Components/ItemsWindows/GameWindow'
+import { FilmWindow } from './Components/ItemsWindows/FilmWindow'
+import { BookWindow } from './Components/ItemsWindows/BookWindow'
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route path='search' element={<Search />} />
       <Route path='profile' element={<Profile />} />
-      <Route path='item/:id' element={<ItemWindows />} />
+      <Route path='item/movie/:id' element={<FilmWindow />} />
+      <Route path='item/anime/:id' element={<FilmWindow />} />
+      <Route path='item/cartoon/:id' element={<FilmWindow />} />
+      <Route path='item/animated-series/:id' element={<FilmWindow />} />
+      <Route path='item/tv-series/:id' element={<FilmWindow />} />
+      <Route path='item/game/:id' element={<GameWindow />} />
+      <Route path='item/book/:id' element={<BookWindow />} />
       <Route path='discuss' element={<ItemDiscussWindow />} />
       <Route path='franchise' element={<FranchiseWindow />} />
     </Route>

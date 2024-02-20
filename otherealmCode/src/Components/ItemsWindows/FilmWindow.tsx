@@ -17,7 +17,7 @@ import { filmItemFetch } from "../../store/fetches/filmFetch";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
 
 
-export const ItemWindows = () => {
+export const FilmWindow = () => {
 
     const dispatch = useAppDispatch();
     const params = useParams();
@@ -27,6 +27,9 @@ export const ItemWindows = () => {
     const [alignment, setAlignment] = React.useState('comments');
 
     const token = useAppSelector((state) => state.filmData.kpToken)
+    React.useEffect(()=>{
+        dispatch(filmItemFetch({paramsId, token}));
+    }, [])
     const currentFilmItem = useAppSelector((state) => state.filmData.currentFilmItem)
     
     
@@ -34,9 +37,7 @@ export const ItemWindows = () => {
     let fontSize;
     if (title.length > 100) fontSize = '20px';
     
-    React.useEffect(()=>{
-        dispatch(filmItemFetch({paramsId, token}));
-    }, [])
+    
     
     console.log(`${currentFilmItem?.type}`)
     return (

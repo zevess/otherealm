@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import filmDataReducer from "./reducers/filmDataReducer";
+import bookDataReducer from "./reducers/bookDataReducer";
+import stateReducer from "./reducers/stateReducer";
+import gameDataReducer from "./reducers/gameDataReducer";
 
 export const store = configureStore({
     reducer:{
+        state: stateReducer,
         filmData: filmDataReducer,
+        bookData: bookDataReducer,
+        gameData: gameDataReducer
     }
 })
 

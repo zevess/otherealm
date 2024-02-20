@@ -1,5 +1,6 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { FC } from "react"
+import { useAppDispatch } from "../../store/hooks";
 
 interface SearchToggleGroupProps{
     alignment: string,
@@ -8,9 +9,8 @@ interface SearchToggleGroupProps{
     }, 
     handleChange:(
         event: React.MouseEvent<HTMLElement>,
-        newAlignment: string
+        newAlignment: string,
     ) =>void;
-
 }
 
 export const SearchToggleGroup: FC<SearchToggleGroupProps> = ({alignment, items, handleChange}) => {

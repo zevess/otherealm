@@ -4,13 +4,13 @@ import axios from "axios";
 
 export const filmFetch = createAsyncThunk(
     'filmData/filmFetch',
-    async ({ filmTitle, token } : { filmTitle: string, token: string },) => {
-        let fetchURL = `https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=20&query=${filmTitle}`
+    async ({ searchTitle, currentMediaPage, kpToken } : { searchTitle: string, currentMediaPage: number, kpToken: string },) => {
+        let fetchURL = `https://api.kinopoisk.dev/v1.4/movie/search?page=${currentMediaPage}&limit=20&query=${searchTitle}`
         console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',
             headers: {
-                'X-API-KEY': `${token}`,
+                'X-API-KEY': `${kpToken}`,
                 'Content-Type': 'application/json',
             },
         });
@@ -38,13 +38,3 @@ export const filmItemFetch = createAsyncThunk(
 )
 
 
-export const booksFetch = createAsyncThunk(
-    'filmData/bookFetch',
-    async ({ filmTitle, gbToken } : { filmTitle: string, gbToken: string },) => {
-        let fetchURL = `https://www.googleapis.com/books/v1/volumes?q=${filmTitle}&key=${gbToken}`
-        console.log(fetchURL)
-
-        const response = await axios.get(fetchURL)
-        return response.data
-    }
-)

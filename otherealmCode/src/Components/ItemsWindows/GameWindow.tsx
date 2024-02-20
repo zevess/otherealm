@@ -15,44 +15,43 @@ import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import { filmItemFetch } from "../../store/fetches/filmFetch";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
+import { gameItemFetch } from "../../store/fetches/gameFetch";
 
 
-export const ItemWindows = () => {
+export const GameWindow = () => {
 
     const dispatch = useAppDispatch();
     const params = useParams();
-    const paramsId = String(params.id);
-    console.log(paramsId);
+    const gameId = String(params.id);
+    console.log(gameId);
+    const rawgToken = useAppSelector((state) => state.gameData.rawgToken);
+    React.useEffect(()=>{
+        dispatch(gameItemFetch({gameId, rawgToken} ));
+    }, [])
     
     const [alignment, setAlignment] = React.useState('comments');
 
-    const token = useAppSelector((state) => state.filmData.kpToken)
-    const currentFilmItem = useAppSelector((state) => state.filmData.currentFilmItem)
+    const currentGameItem = useAppSelector((state) => state.gameData.currentGameItem)
     
     
-    const title = `${currentFilmItem?.name}`;
+    const title = `${currentGameItem?.name}`;
     let fontSize;
-    if (title.length > 100) fontSize = '20px';
-    
-    React.useEffect(()=>{
-        dispatch(filmItemFetch({paramsId, token}));
-    }, [])
-    
-    console.log(`${currentFilmItem?.type}`)
+    if (title.length > 100) fontSize = '20px';    
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
             <Box maxWidth={'1500px'} >
-                <Box component={'img'} src={`${currentFilmItem?.poster?.url}`} width={'100%'} height={'483px'} borderRadius={'16px'} sx={{ objectFit: 'cover', filter: 'blur(5px)' }}></Box>
+                <Box component={'img'} src={`${currentGameItem?.background_image}`} width={'100%'} height={'483px'} borderRadius={'16px'} sx={{ objectFit: 'cover', filter: 'blur(5px)' }}></Box>
                 <Box bgcolor={'white'} border={'solid 2px black'} height={'auto'} paddingBottom={'20px'} >
                     <Box display={'flex'} justifyContent={'flex-end'}>
                         <Box marginTop={'-20%'} display={'flex'} alignItems={'flex-start'} >
 
-                            <Box zIndex={1} height={'571px'} component={'img'} src={`${currentFilmItem?.poster?.url}`} sx={{
-                                aspectRatio: '380/571'
+                            <Box zIndex={1} height={'571px'} component={'img'} src={`${currentGameItem?.background_image}`} sx={{
+                                aspectRatio: '380/571', objectFit: 'cover'
                             }}></Box>
                             
-                            <ItemTitle title={`${title}`} originalTitle={`${currentFilmItem?.alternativeName}`} />
-                            <ItemType itemType={`${currentFilmItem?.type}`} />
+                            <ItemTitle title={`${title}`} originalTitle={`${currentGameItem?.name_original}`} />
+                            <ItemType itemType={`game`} />
                         </Box>
                         <Box width={'64%'} display={'flex'} flexDirection={'column'} >
                             
@@ -66,16 +65,13 @@ export const ItemWindows = () => {
                             </Box>
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}> 
                                 <Box display={'flex'}>
-                                    <Typography variant='h5' paddingRight={'10px'}>страны: </Typography>
-                                {currentFilmItem?.countries?.map((country, index) =>(
-                                    <Typography paddingRight={'10px'} variant="h5" key={index}>{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
-                                ))}
+                                    
                                 </Box>
                             </Box>
                             
                         </Box>
                     </Box>
-                    <ItemDescription description={`${currentFilmItem?.description}`}/>
+                    <ItemDescription description={`${currentGameItem?.description_raw}`}/>
 
                 </Box>
 

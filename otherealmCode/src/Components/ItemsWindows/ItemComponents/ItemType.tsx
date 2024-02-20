@@ -27,16 +27,19 @@ export const ItemType:FC<ItemTypeProps> = ({itemType}) => {
         typeColor = '#61B8D4'
         itemTypeRu = 'фильм'
     }
-    if (itemType == 'игра') {
-        typeColor = '#7161D4'
-    }
-    if (itemType == 'книга') {
-        typeColor = '#D49F61'
-    }
     if (itemType == 'anime') {
         typeColor = '#D461CF'
         itemTypeRu = 'аниме'
     }
+    if (itemType == 'game') {
+        typeColor = '#7161D4'
+        itemTypeRu = 'игра'
+    }
+    if (itemType == 'book') {
+        typeColor = '#D49F61'
+        itemTypeRu = 'книга'
+    }
+    
     if (itemType == 'франшиза') {
         typeColor = '#7C94B0'
     }

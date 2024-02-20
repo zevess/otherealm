@@ -1,5 +1,8 @@
 
 export interface filmResultProps{
+    total: number,
+    limit: number,
+    pages: number,
     docs: [
         {
             id: number,
@@ -49,6 +52,7 @@ export interface currentFilmItemProps{
 }
 
 export interface bookResultProps{
+    totalItems: number,
     items: [
         {
             id?: string,
@@ -66,3 +70,41 @@ export interface bookResultProps{
         }
     ]
 } 
+
+
+export interface currentBookProps{
+    id?: string,
+    volumeInfo?:{
+        title?: string,
+        authors?: string[],
+        publishedDate?: string,
+        description?: string,
+        pageCount?: number,
+        imageLinks?: {
+            thumbnail?: string
+        }
+    }
+}
+
+
+export interface gameResultProps{
+    count: number
+    results: [
+        {
+            slug?: string,
+            name?: string,
+            background_image?: string,
+            id?: number,
+        }
+    ] 
+}
+export interface currentGameItemProps{
+    id?: number,
+    name?: string,
+    name_original?: string,
+    description?: string,
+    description_raw: string,
+    released?: string,
+    rating?: number,
+    background_image?: string
+}
