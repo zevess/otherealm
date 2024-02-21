@@ -53,7 +53,7 @@ export const Search = () => {
 
     React.useEffect(() => {
         dispatch(addItemTitle(text));
-    }, [text])
+    }, [text, searchAlignment])
     dispatch(setSearchSection(searchAlignment));
 
 
@@ -64,21 +64,20 @@ export const Search = () => {
             alert("поле ввода не должно быть пустым!")
             return
         }
-
     }
     
-    const getBooks = (searchTitle: string, gbToken: string, page: number) => {
+    const getBooks = (searchTitle: string, gbToken: string, currentBookPage: number) => {
         if (searchTitle !== (null || '')) {
-            dispatch(booksFetch({ searchTitle, gbToken, page }))
+            dispatch(booksFetch({ searchTitle, gbToken, currentBookPage }))
         }else{
             alert("поле ввода не должно быть пустым!")
             return
         }
     }
     
-    const getGame = (searchTitle: string, rawgToken: string, page: number) => {
+    const getGame = (searchTitle: string, rawgToken: string, currentGamePage: number) => {
         if (searchTitle !== (null || '')) {
-            dispatch(gameFetch({ searchTitle, rawgToken, page }))
+            dispatch(gameFetch({ searchTitle, rawgToken, currentGamePage }))
         }else{
             alert("поле ввода не должно быть пустым!")
             return
@@ -89,9 +88,8 @@ export const Search = () => {
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <InputText setText={setText} onClick={() => {
                 getFilms(searchTitle, currentMediaPage, kpToken)
-                // getBooks(searchTitle, gbToken, currentBookPage);
-                // getGame(searchTitle, rawgToken, currentGamePage);
-
+                getBooks(searchTitle, gbToken, currentBookPage);
+                getGame(searchTitle, rawgToken, currentGamePage);
             }} placeholder="поиск фильма, игры, литературы" sx={inputStyles} />
             <Box width={'60%'}>
                 <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSearchAlignment)} alignment={searchAlignment}></SearchToggleGroup>
@@ -108,7 +106,6 @@ export const Search = () => {
                 </Box>
                 <SearchResult />
             </Box>
-            
         </Box>
     )
 }

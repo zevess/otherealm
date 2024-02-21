@@ -3,8 +3,8 @@ import axios from "axios"
 
 export const booksFetch = createAsyncThunk(
     'filmData/bookFetch',
-    async ({ searchTitle, gbToken, page } : { searchTitle: string, gbToken: string, page: number },) => {
-        let fetchURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&startIndex=${(page-1)*20}&maxResults=20&key=${gbToken}`
+    async ({ searchTitle, gbToken, currentBookPage } : { searchTitle: string, gbToken: string, currentBookPage: number },) => {
+        let fetchURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTitle}&startIndex=${(currentBookPage-1)*20}&maxResults=20&key=${gbToken}`
         console.log(fetchURL)
 
         const response = await axios.get(fetchURL)

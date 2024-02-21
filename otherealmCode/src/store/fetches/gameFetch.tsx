@@ -3,8 +3,8 @@ import axios from "axios"
 
 export const gameFetch = createAsyncThunk(
     'gameData/gameFetch',
-    async ({ searchTitle, rawgToken, page }: { searchTitle: string, rawgToken: string, page: number },) => {
-        let fetchURL = `https://api.rawg.io/api/games?key=${rawgToken}&search=${searchTitle}&page=${page}`
+    async ({ searchTitle, rawgToken, currentGamePage }: { searchTitle: string, rawgToken: string, currentGamePage: number },) => {
+        let fetchURL = `https://api.rawg.io/api/games?key=${rawgToken}&search=${searchTitle}&page=${currentGamePage}`
         console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',

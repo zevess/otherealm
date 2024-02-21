@@ -25,14 +25,14 @@ export const bookDataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(booksFetch.fulfilled, (state, action: PayloadAction<bookResultProps>) => {
-                // console.log("Successfully");
+                console.log("Successfully");
                 state.bookResult = action.payload
             })
             .addCase(booksFetch.rejected, () => {
                 console.log("Rejected");
             })
             .addCase(bookItemFetch.fulfilled, (state, action: PayloadAction<currentBookProps>) => {
-                // console.log("Successfully");
+                console.log("Successfully");
                 state.currentBookItem = action.payload
             })
             .addCase(bookItemFetch.rejected, () => {

@@ -25,14 +25,14 @@ export const filmDataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(filmFetch.fulfilled, (state, action: PayloadAction<filmResultProps>) => {
-                // console.log("Successfully");
+                console.log("Successfully");
                 state.filmResult = action.payload
             })
             .addCase(filmFetch.rejected, () => {
                 console.log('Rejected')
             })
             .addCase(filmItemFetch.fulfilled, (state, action: PayloadAction<currentFilmItemProps>) => {
-                // console.log("Successfully");
+                console.log("Successfully");
                 state.currentFilmItem = action.payload
             })
             .addCase(filmItemFetch.rejected, () => {

@@ -5,6 +5,8 @@ import React from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { setBookPage, setGamePage, setMediaPage } from "../../store/reducers/stateReducer";
 import { filmFetch } from "../../store/fetches/filmFetch";
+import { gameFetch } from "../../store/fetches/gameFetch";
+import { booksFetch } from "../../store/fetches/bookFetch";
 
 export const SearchResult = () => {
 
@@ -16,7 +18,6 @@ export const SearchResult = () => {
             {searchSection == 'games' && <GamesSearchList />}
         </>
     )
-
 }
 
 export const FilmsSearchList = () => {
@@ -27,13 +28,7 @@ export const FilmsSearchList = () => {
     const filmResult = useAppSelector(state => state.filmData.filmResult?.docs);
     const currentMediaPageSelector = useAppSelector(state => state.state.currentMediaPage);
     const totalMediaPage = useAppSelector(state => state.state.totalMediaPage)
-    const [currentMediaPage, setCurrentMediaPage] = React.useState(currentMediaPageSelector);
-    React.useEffect(() => {
-        dispatch(setMediaPage(currentMediaPage))
-        if(searchTitle !== ''){
-            dispatch(filmFetch({searchTitle, currentMediaPage, kpToken}))
-        }
-    }, [currentMediaPage, currentMediaPage, kpToken])
+
     return (
         <>
             <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
@@ -42,8 +37,8 @@ export const FilmsSearchList = () => {
                 ))}
             </Box>
             <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(event, value) => {
-                setCurrentMediaPage(value);
-                
+                dispatch(setMediaPage(value))
+                dispatch(filmFetch({searchTitle, currentMediaPage: value, kpToken}))
             }} />
         </>
     )
@@ -52,8 +47,8 @@ export const FilmsSearchList = () => {
 export const BooksSearchList = () => {
     const dispatch = useAppDispatch();
 
-    const searchTitle = useAppSelector((state) => state.state.searchTitle)
-    const searchTitleNoSpace = searchTitle.replace(' ', '_');
+    const searchTitleSelector = useAppSelector((state) => state.state.searchTitle)
+    const searchTitle = searchTitleSelector.replace(' ', '_');
 
     const gbToken = useAppSelector((state) => state.bookData.gbToken)
 
@@ -61,10 +56,6 @@ export const BooksSearchList = () => {
     const bookResult = useAppSelector(state => state.bookData.bookResult?.items);
     const totalBookPage = useAppSelector(state => state.state.totalBookPage)
 
-    const [page, setPage] = React.useState(currentBookPage);
-    React.useEffect(() => {
-        dispatch(setBookPage(page))
-    }, [page])
     
     return (
         <>
@@ -74,7 +65,8 @@ export const BooksSearchList = () => {
                 ))}
             </Box>
             <Pagination page={currentBookPage} count={totalBookPage} onChange={(event, value) => {
-                setPage(value);
+                dispatch(setBookPage(value))
+                dispatch(booksFetch({searchTitle, gbToken, currentBookPage: value}))
             }} />
         </>
 
@@ -84,22 +76,18 @@ export const BooksSearchList = () => {
 export const GamesSearchList = () => {
     const dispatch = useAppDispatch();
 
-
-    const searchTitle = useAppSelector((state) => state.state.searchTitle)
-    const searchTitleNoSpace = searchTitle.replace(' ', '_');
+    const searchTitleSelector = useAppSelector((state) => state.state.searchTitle)
+    const searchTitle = searchTitleSelector.replace(' ', '_');
 
     const rawgToken = useAppSelector((state) => state.gameData.rawgToken);
 
-
     const gamesResult = useAppSelector(state => state.gameData.gameResult?.results)
-    const currentGamePage = useAppSelector(state => state.state.currentGamePage);
+    const currentGamePageSelector = useAppSelector(state => state.state.currentGamePage);
     const totalGamePage = useAppSelector(state => state.state.totalGamePage);
 
-    const [page, setPage] = React.useState(currentGamePage);
+    const [currentGamePage, setCurrentGamePage] = React.useState(currentGamePageSelector);
+
     
-    React.useEffect(() => {
-        dispatch(setGamePage(page))
-    }, [page])
 
 
     return (
@@ -109,8 +97,9 @@ export const GamesSearchList = () => {
                     <ItemCard itemPoster={item.background_image ? item.background_image : '../src/assets/img/noImg.png'} id={item.id} key={item.id} itemTitle={item.name} itemType="game" itemAltenativeTitle={item.alternativeName} />
                 ))}
             </Box>
-            <Pagination page={currentGamePage} count={20} onChange={(event, value) => {
-                setPage(value);
+            <Pagination page={currentGamePageSelector} count={totalGamePage} onChange={(event, value) => {
+                dispatch(setGamePage(value));
+                dispatch(gameFetch({searchTitle, rawgToken, currentGamePage: value}))
                 
             }} />
         </>

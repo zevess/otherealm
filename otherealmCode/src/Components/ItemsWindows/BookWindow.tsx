@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../store/hooks";
 import React from "react";
 import { bookItemFetch } from "../../store/fetches/bookFetch";
 import { useAppSelector } from "../../store";
-import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, CircularProgress, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { ItemType } from "./ItemComponents/ItemType";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
 import { ButtonUsage } from "../Button";
@@ -33,15 +33,19 @@ export const BookWindow = () => {
     let fontSize;
     if (title.length > 100) fontSize = '20px';    
 
+
+    if(currentBookItem == undefined){
+        return <CircularProgress/>
+    }
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
             <Box maxWidth={'1500px'} minWidth={'1500px'}>
-                <Box component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}`} width={'100%'} height={'483px'} borderRadius={'16px'} sx={{ objectFit: 'cover', filter: 'blur(5px)' }}></Box>
+                <Box component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} width={'100%'} height={'483px'} borderRadius={'16px'} sx={{ objectFit: 'cover', filter: 'blur(5px)' }}></Box>
                 <Box bgcolor={'white'} border={'solid 2px black'} height={'auto'} paddingBottom={'20px'} >
                     <Box display={'flex'} justifyContent={'flex-end'}>
                         <Box marginTop={'-20%'} display={'flex'} alignItems={'flex-start'} >
 
-                            <Box zIndex={1} height={'571px'} component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}`} sx={{
+                            <Box zIndex={1} height={'571px'} component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} sx={{
                                 aspectRatio: '380/571', objectFit: 'cover'
                             }}></Box>
                             

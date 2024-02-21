@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Avatar, Box, CircularProgress, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { FranchiseCard } from "../Cards/FranchiseCard"
 import { ButtonUsage } from "../Button"
 import React, { FC, useEffect } from "react";
@@ -37,6 +37,10 @@ export const GameWindow = () => {
     const title = `${currentGameItem?.name}`;
     let fontSize;
     if (title.length > 100) fontSize = '20px';    
+
+    if(currentGameItem == undefined){
+        return <CircularProgress/>
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >

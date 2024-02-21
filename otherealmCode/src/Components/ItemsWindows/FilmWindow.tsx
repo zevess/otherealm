@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Avatar, Box, CircularProgress, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { FranchiseCard } from "../Cards/FranchiseCard"
 import { ButtonUsage } from "../Button"
 import React, { FC, useEffect } from "react";
@@ -37,9 +37,12 @@ export const FilmWindow = () => {
     let fontSize;
     if (title.length > 100) fontSize = '20px';
     
-    
-    
     console.log(`${currentFilmItem?.type}`)
+    
+    if(currentFilmItem == undefined){
+        return <CircularProgress/>
+    }
+    
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
             <Box maxWidth={'1500px'} >
