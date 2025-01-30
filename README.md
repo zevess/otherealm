@@ -1,4 +1,29 @@
-# otherealm
-для запуска нужна среда разработки Visual Studio Code. Открыв проект в Visual Studio Code, нужно создать 2 терминала, потянув нижнюю панель программы наверх и нажать +. Как только 2 терминала были созданы, для каждого из них нужно запустить отдельные папки:
-1) в первом терминале, находять в папке otherealm, ввести команду "cd otherealm-backend" для перехода в бэкэнда, после чего ввести команду "npm run start:dev". если сервер запустился успешно, отобразится сообщение "db ok"
-2)  во втором терминале, находять в папке otherealm, ввести команду "cd otherealm-frontend" для запуска фронтенда, после чего ввести "npm run dev". при успешном запуске отобразится ссылка на localhost, на которую нужно перейти для запуска проекта.
+# Otherealm
+Social network portal with the following functions:
+* searching for media works, such as films, cartoons, games and books
+* maintaining your own lists of media works
+* discussions with users in comments and discussions
+* subscribing to users and a feed of user posts
+
+Deployed on: https://otherealm.vercel.app/ .
+
+MERN stack.
+
+**The Backend is currently NOT WORKING due to the termination of MongoDB operations in the Russian Federation**.
+
+To run locally:
+```
+git clone https://github.com/zevess/otherealm
+```
+To run the project, two terminals are required.
+In the first terminal to run Backend **Currently NOT WORKING** :
+```
+cd otherealm-frontend
+npm run start
+```
+In the second terminal to run Frontend:
+```
+cd otherealm-backend
+npm run dev
+```
+Then open the created *localhost:3000*
