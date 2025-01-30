@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useAppSelector } from "../../../store";
 import axios from '../../../axios'
-import { ModalWindow } from "../../ModalWindow";
-import { ColorButton } from "../../CustomButton";
+import { ModalWindow } from "../../../utils/ModalWindow";
+import { ColorButton } from "../../../utils/CustomButton";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearComments, fetchGetComments } from "../../../store/comment";
 
@@ -28,6 +28,8 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
 
     const userId = useAppSelector((state) => state.authData.data?._id)
     const isSameUser = (userId == commentUserId);
+
+    const adminId = useAppSelector((state) => state.state.adminId);
 
     const dateToForm = new Date(date);
     const options = {
@@ -81,7 +83,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentUser__info">
-                        <Avatar className="commentUser__info-avatar" src={`${import.meta.env.VITE_API_URL}${avatar}`}></Avatar>
+                        <Avatar className="commentUser__info-avatar" src={`${avatar}`}></Avatar>
                         <p className="commentUser__info-nick">{name}</p>
                     </div>
                 </Link>
@@ -95,7 +97,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             </div>
 
 
-            {isSameUser && (
+            {(isSameUser || (userId == adminId)) && (
                 <div style={{ marginLeft: 'auto' }}>
                     <IconButton onClick={() => setToggleSetting(true)}>
                         <EditOutlinedIcon />

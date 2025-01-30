@@ -2,9 +2,16 @@ import { Typography } from "@mui/material"
 import { useAppSelector } from "../../store"
 import { ProfileCard } from "../Cards/ProfileCard"
 
+
 export const FollowsList = () => {
 
-    const userFollows = useAppSelector((state) => state.usersData.currentUser.items?.follows)
+    
+    const userId = useAppSelector((state) => state.authData.data?._id);
+    const currentUser = useAppSelector((state) => state.usersData.currentUser.items);
+
+    const isSameUser = (userId == currentUser?._id)
+
+    const userFollows = isSameUser ? useAppSelector((state) => state.authData.data?.follows): useAppSelector((state) => state.usersData.currentUser.items?.follows)
 
     return (
         <div className="listWindowWrapper">

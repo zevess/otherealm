@@ -10,8 +10,8 @@ import { useAppSelector } from "../../store"
 import { useAppDispatch } from "../../store/hooks.tsx"
 import { clearFavourite, fetchUserFavourites } from "../../store/favourite.ts"
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { ModalWindow } from "../ModalWindow.tsx"
-import { ColorButton } from "../CustomButton.ts"
+import { ModalWindow } from "../../utils/ModalWindow.tsx"
+import { ColorButton } from "../../utils/CustomButton.ts"
 
 
 interface ListWindowProps {

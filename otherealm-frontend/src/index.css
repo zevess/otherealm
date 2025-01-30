@@ -9,7 +9,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
+  color: #1a1a1a;
   background-color: #242424;
 
   font-synthesis: none;
@@ -74,7 +75,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    /* color: #213547; */
     background-color: #ffffff;
   }
 
@@ -88,6 +89,16 @@ button:focus-visible {
   }
 }
 
+.footer {
+  padding: 0rem !important;
+  margin-top: auto;
+  height: 100px;
+  background-color: black;
+  width: 100%;
+  z-index: 0;
+  flex: 0 0 auto;
+}
+
 .authWrapper {
   width: 100%;
 }
@@ -98,6 +109,7 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   width: 50%;
+  max-width: 1300px;
   height: 100%;
   background-color: white;
   border: solid 2px #9095f7;
@@ -689,12 +701,31 @@ button:focus-visible {
 }
 
 
+.processingData{
+  margin: 0 auto;
+  width: 80%;
+  height: 80vh;
+  background-color: white;
+
+  padding: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.processingData__text{
+  
+  overflow-y: scroll;
+
+}
 
 .welcomeWrapper {
   width: 100%;
+  max-width: 1600px;
   display: flex;
   flex-direction: column;
-  justify-content: center
+  margin: 0 auto;
 }
 
 .welcomeInfo {
@@ -739,9 +770,10 @@ button:focus-visible {
 }
 
 .welcomeGif {
-  border: solid 1.5px #646cff;
+  border: solid 2px #646cff;
   border-radius: 16px;
   max-width: 40%;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .welcomeTextField-about {
@@ -749,6 +781,7 @@ button:focus-visible {
   background-color: white;
   border-radius: 30px;
   border: solid 3px black;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .welcomeTextField-about__end {
@@ -761,6 +794,7 @@ button:focus-visible {
   border: solid 2px black;
   border-radius: 40px;
   background-color: white;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .postListWrapper {
@@ -1263,7 +1297,7 @@ button:focus-visible {
   }
 
   .profileHead__user-name {
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 10px;
   }
 
@@ -1388,116 +1422,6 @@ button:focus-visible {
 
 }
 
-
-
-/* @media (max-width: 480px) {
-
-  .toggleGroup {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .toggleGroupItem {
-    width: 80% !important;
-  }
-
-  .searchItemPoster {
-    height: 451px;
-  }
-
-  .detailsItemText {
-    font-size: 18px !important;
-  }
-
-  .commentUser__info {
-    margin: 6px;
-  }
-
-  .commentUser__info-avatar {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .commentUser__info-nick {
-    font-size: 16px !important;
-  }
-
-  .commentText {
-    font-size: 16px !important;
-  }
-
-  .discussLinkTitle {
-    font-size: 26px !important;
-
-  }
-
-  .discussItemTitle {
-    width: 90%;
-  }
-
-  .discussTitle {
-    font-size: 20px !important;
-
-  }
-
-  .searchSourceLink{
-    font-size: 16px;
-    
-  }
-  .toggleGroup {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .toggleGroupItem {
-    width: 80% !important;
-  }
-
-  .searchItemPoster {
-    height: 451px;
-  }
-
-  .detailsItemText {
-    font-size: 18px !important;
-  }
-
-  .commentUser__info {
-    margin: 6px;
-  }
-
-  .commentUser__info-avatar {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .commentUser__info-nick {
-    font-size: 16px !important;
-  }
-
-  .commentText {
-    font-size: 16px !important;
-  }
-
-  .discussLinkTitle {
-    font-size: 26px !important;
-
-  }
-
-  .discussItemTitle {
-    width: 90%;
-  }
-
-  .discussTitle {
-    font-size: 20px !important;
-
-  }
-
-  .searchSourceLink{
-    font-size: 16px;
-    
-  }
-
-} */
 
 @media (min-width: 320px) and (max-width: 480px) {
 

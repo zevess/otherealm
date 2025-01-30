@@ -25,8 +25,6 @@ interface DiscussProps {
 export const DiscussPreview: FC<DiscussProps> = ({ user, userId, nick, date, title, imageUrl, id, itemId, avatar, isText }) => {
 
     const authUserId = (useAppSelector((state) => state.authData.data?._id));
-    // const selectedUserId = 
-    // const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
     const isSameUser = (userId && (authUserId == userId))
     
     const dateToForm = new Date(date);
@@ -49,7 +47,7 @@ export const DiscussPreview: FC<DiscussProps> = ({ user, userId, nick, date, tit
             <div className="postItemDetails">
                 <div className="postItemDetails-user">
                     <Link to={`/profile/${nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <Avatar src={`${import.meta.env.VITE_API_URL}${avatar}`} className="postItemDetails-user__avatar" />
+                        <Avatar src={`${avatar}`} className="postItemDetails-user__avatar" />
                         <div className="postItemDetails-user__info">
                             <p className="postUserInfo nick">{user}</p>
                             <Divider sx={{ width: '100%' }} />
@@ -70,7 +68,7 @@ export const DiscussPreview: FC<DiscussProps> = ({ user, userId, nick, date, tit
             </div>
 
             <Link to={`/item/${itemId}/discuss/${id}`}>
-                {imageUrl && <img src={`${import.meta.env.VITE_API_URL}${imageUrl}`} className='postItemImg' ></img>}
+                {imageUrl && <img src={`${imageUrl}`} className='postItemImg' ></img>}
                 <p className="postItemText">{title}</p>
                 {isText && <p>...</p>}
 

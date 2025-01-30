@@ -1,5 +1,5 @@
 import { Post } from "./Post"
-import { ColorButtonBlue } from "../CustomButton"
+import { ColorButtonBlue } from "../../utils/CustomButton"
 
 import { useAppSelector } from "../../store"
 import React from "react"
@@ -42,7 +42,7 @@ export const PostList = () => {
                     </>
                 )
             }
-            {(!isSameUser && (addPost == false)) &&
+            {(isSameUser == true && (addPost == false)) &&
                 <ColorButtonBlue onClick={() => setAddPost(true)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px' }}>создать запись</ColorButtonBlue>
             }
 

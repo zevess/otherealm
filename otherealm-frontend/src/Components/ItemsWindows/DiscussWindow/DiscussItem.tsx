@@ -15,51 +15,27 @@ export const DiscussItem = () => {
 
     const dispatch = useAppDispatch();
 
-    // const [post, setPost] = React.useState<postProps | null>(null);
-
     const discussSelector = useAppSelector(state => state.discussData.currentDiscuss.currentDiscuss)
+    const adminId = useAppSelector((state) => state.state.adminId)
 
-    // const bookSelector = useAppSelector((state) => state.bookData.currentBookItem);
-    // const filmSelector = useAppSelector((state) => state.filmData.currentFilmItem);
-    // const gameSelector = useAppSelector((state) => state.gameData.currentGameItem);
-
-        
     const discussObjectTitle = window.localStorage.getItem('currentObjectTitle');
-    // let discussObjectTitle
-    // if ((filmSelector?.name || gameSelector?.name || bookSelector?.volumeInfo?.title) == undefined) {
-    //     discussObjectTitle = window.localStorage.getItem('currentObjectTitle');
-    // }
     const params = useParams();
     const discussId = String(params.discussId);
 
-
-    const userId = (useAppSelector((state) => state.authData.data?._id));
-
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
-
+    
     const isSameUser = (authId == currentUserId)
-
-    // const isSameUser = (userId === discussSelector?.user._id)
-
-
 
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const itemId = `${parts[4]}${parts[5]}`;
     const itemIdSlash = `${parts[4]}/${parts[5]}`
-    // const postId = String(parts.slice(-2).join(''))
-    console.log(discussId, itemId)
 
     React.useEffect(() => {
         if (discussId !== undefined) {
             dispatch(clearComments())
             dispatch(fetchOneDiscuss({ itemId, discussId }));
-
-            // axios.get(`/post/${postId}`).then(res => {
-            //     setPost(res.data);
-
-            // })
         }
     }, [discussId])
 
@@ -83,8 +59,8 @@ export const DiscussItem = () => {
                     <ItemTitle title={`${discussObjectTitle}`} sx={{ margin: '0 auto' }} />
                     <Divider sx={{marginTop: '12px', marginBottom: '12px'}} />
                     <div className="postItemDetails-user">
-                        <Link to={`/profile/${discussSelector.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <Avatar src={`${import.meta.env.VITE_API_URL}${discussSelector.user.avatarUrl}`} className="postItemDetails-user__avatar" />
+                        <Link to={discussSelector.user ? `/profile/${discussSelector.user.nick}` : 'пользователь удален'} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <Avatar src={`${discussSelector.user.avatarUrl}`} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
                                 <p className="postUserInfo nick">{discussSelector.user.name}</p>
                                 <Divider sx={{ width: '100%' }} />
@@ -99,7 +75,7 @@ export const DiscussItem = () => {
                         </Box>
 
 
-                        {isSameUser && <Box marginLeft={'auto'}>
+                        {(isSameUser || (authId == adminId)) && <Box marginLeft={'auto'}>
                             <Link to={`/item/${itemIdSlash}/discuss/${discussId}/edit`}>
                                 <IconButton >
                                     <EditOutlinedIcon />
@@ -116,7 +92,7 @@ export const DiscussItem = () => {
                 </div>
 
                 {discussSelector.imageUrl &&
-                    <img src={`${import.meta.env.VITE_API_URL}${discussSelector.imageUrl}`} className="fullPostImg"></img>
+                    <img src={`${discussSelector.imageUrl}`} className="fullPostImg"></img>
                 }
 
                 <Typography variant="h4" className="fullPostTitle">{discussSelector.title}</Typography>

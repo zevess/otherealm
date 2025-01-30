@@ -19,14 +19,6 @@ export const createComment = async(req, res) =>{
     }
 }
 
-
-
-
-
-
-
-
-
 export const getComments = async(req,res) =>{
     try{
         const postId = req.params.postId;
@@ -50,10 +42,24 @@ export const getComments = async(req,res) =>{
     }
 }
 
+export const getAllComments = async(req,res) =>{
+    try{
+        const comments = await CommentModel.find().populate('user').exec();
+        if (comments.length === 0){
+            return res.status(404).json({
+                message: "комментарии не найдены"
+            })
+        }
 
+        res.json(comments);
 
-
-
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: 'не удалось получить комментарии'
+        })
+    }
+}
 
 export const editComment = async(req, res) =>{
     try {
@@ -80,9 +86,6 @@ export const editComment = async(req, res) =>{
 
     }
 }
-
-
-
 
 
 export const deleteComment = async (req, res) =>{

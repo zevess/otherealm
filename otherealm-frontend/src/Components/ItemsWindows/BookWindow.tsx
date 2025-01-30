@@ -55,7 +55,7 @@ export const BookWindow = () => {
 
                 <div className="searchItemContent" >
                     <div className="searchItemContent__left">
-                        <img className="searchItemPoster" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} alt="" />
+                        <img className="searchItemPoster" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : 'https://i.ibb.co/tbwz7KG/noImg.png'} alt="" />
                         <AddToSection />
                     </div>
 

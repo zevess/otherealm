@@ -6,7 +6,7 @@ import { gameFetch, gameItemFetch } from "../fetches/gameFetch";
 
 interface initialStateProps {
     rawgToken: string,
-    gameResult?: gameResultProps,
+    gameResult?: gameResultProps | null,
     gamesLoadingStatus?: string,
     currentGameItem?: currentGameItemProps,
     currentGameItemLoadingStatus?: string
@@ -23,6 +23,9 @@ export const gameDataSlice = createSlice({
     name: 'gameData',
     initialState,
     reducers: {
+        clearGamesState: (state) => {
+            state.gameResult = null
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -30,24 +33,26 @@ export const gameDataSlice = createSlice({
                 state.gamesLoadingStatus = 'loading'
             })
             .addCase(gameFetch.fulfilled, (state, action: PayloadAction<gameResultProps>) => {
-                console.log("Successfully");
+                
                 state.gamesLoadingStatus = 'done'
                 state.gameResult = action.payload
             })
             .addCase(gameFetch.rejected, (state) => {
                 state.gamesLoadingStatus = 'rejected'
-                console.log('Rejected')
+                
             })
             .addCase(gameItemFetch.fulfilled, (state, action: PayloadAction<currentGameItemProps>) => {
-                console.log("Successfully");
+            
                 state.currentGameItemLoadingStatus = 'done'
                 state.currentGameItem = action.payload
             })
             .addCase(gameItemFetch.rejected, (state) => {
-                state.currentGameItemLoadingStatus = 'done'
-                console.log('Rejected')
+                state.currentGameItemLoadingStatus = 'rejected'
+                
             })
     }
 })
+
+export const {clearGamesState} = gameDataSlice.actions
 
 export default gameDataSlice.reducer;

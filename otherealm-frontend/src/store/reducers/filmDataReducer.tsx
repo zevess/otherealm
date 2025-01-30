@@ -7,6 +7,7 @@ interface initialStateProps {
     kpToken: string,
     filmResult?: filmResultProps,
     currentFilmItem?: currentFilmItemProps,
+    currentFilmItemLoadingStatus?: string
     filmsLoadingStatus?: string
 }
 
@@ -28,20 +29,20 @@ export const filmDataSlice = createSlice({
                 state.filmsLoadingStatus = 'loading'
             })
             .addCase(filmFetch.fulfilled, (state, action: PayloadAction<filmResultProps>) => {
-                console.log("Successfully");
+                
                 state.filmsLoadingStatus = 'done'
                 state.filmResult = action.payload
             })
             .addCase(filmFetch.rejected, (state) => {
-                console.log('Rejected')
+                
                 state.filmsLoadingStatus = 'rejected'
             })
             .addCase(filmItemFetch.fulfilled, (state, action: PayloadAction<currentFilmItemProps>) => {
-                console.log("Successfully");
+                state.currentFilmItemLoadingStatus = 'done'
                 state.currentFilmItem = action.payload
             })
-            .addCase(filmItemFetch.rejected, () => {
-                console.log('Rejected')
+            .addCase(filmItemFetch.rejected, (state) => {
+                state.currentFilmItemLoadingStatus = 'rejected'
             })
     }
 })

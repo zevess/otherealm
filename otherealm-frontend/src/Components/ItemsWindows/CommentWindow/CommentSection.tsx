@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { InputText } from "../../InputText"
+import { InputText } from "../../../utils/InputText.tsx"
 import { Comment } from "./Comment"
 import React, { FC } from "react"
 
@@ -20,7 +20,8 @@ export const CommentSection: FC<CommentSectionProps> = ({ postId }) => {
     const dispatch = useAppDispatch();
     const [text, setCommentText] = React.useState('');
     const commentsData = useAppSelector(state => state.commentsData.comments.items)
-
+    const isAuth = useAppSelector((state) => state.authData.data);
+    
     React.useEffect(() => {
         dispatch(clearComments())
         dispatch(fetchGetComments(postId))

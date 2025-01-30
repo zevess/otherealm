@@ -7,6 +7,11 @@ export const fetchItemDiscusses = createAsyncThunk('/discuss/:itemId', async (it
     return data
 })
 
+export const fetchAllDiscusses = createAsyncThunk('/allDiscuss', async () => {
+    const { data } = await axios.get('/discuss');
+    return data
+})
+
 export const fetchOneDiscuss = createAsyncThunk('/discuss/:itemId/:discussId', async ({itemId, discussId}: {itemId: string, discussId: string}) => {
     const { data } = await axios.get(`/discuss/${itemId}/${discussId}`);
     return data
@@ -58,6 +63,17 @@ export const discussSlice = createSlice({
                 state.discusses.discusses = action.payload
             })
             .addCase(fetchItemDiscusses.rejected, (state) => {
+                state.discusses.status = 'rejected'
+            })
+
+            .addCase(fetchAllDiscusses.pending, (state) => {
+                state.discusses.status = 'loading'
+            })
+            .addCase(fetchAllDiscusses.fulfilled, (state, action) => {
+                state.discusses.status = 'loaded'
+                state.discusses.discusses = action.payload
+            })
+            .addCase(fetchAllDiscusses.rejected, (state) => {
                 state.discusses.status = 'rejected'
             })
 

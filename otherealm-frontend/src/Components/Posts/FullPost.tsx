@@ -44,10 +44,10 @@ export const FullPost = () => {
                 <div className="fullPostTop">
 
                     <div className="postItemDetails-user">
-                        <Link to={`/profile/${postSelector.post.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <Avatar src={`${import.meta.env.VITE_API_URL}${postSelector.post.user.avatarUrl}`} className="postItemDetails-user__avatar" />
+                        <Link to={postSelector.post.user ? `/profile/${postSelector.post.user.nick}` : ''} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <Avatar src={postSelector.post.user ? `${postSelector.post.user.avatarUrl}` : ''} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
-                                <p className="postUserInfo nick">{postSelector.post.user.name}</p>
+                                <p className="postUserInfo nick">{postSelector.post.user ? postSelector.post.user.name : 'пользователь удален'}</p>
                                 <Divider sx={{ width: '100%' }} />
                                 <p className="postUserInfo date">{formatedDate + '; ' + time}</p>
 
@@ -71,7 +71,7 @@ export const FullPost = () => {
                 </div>
 
                 {postSelector.post.imageUrl &&
-                    <img src={`${import.meta.env.VITE_API_URL}${postSelector.post.imageUrl}`} className="fullPostImg"></img>
+                    <img src={`${postSelector.post.imageUrl}`} className="fullPostImg"></img>
                 }
 
                 <Typography variant="h4" className="fullPostTitle">{postSelector.post.title}</Typography>

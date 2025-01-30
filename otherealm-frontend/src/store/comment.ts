@@ -12,6 +12,11 @@ export const fetchGetComments = createAsyncThunk('/comments/fetchComments', asyn
     return data.data
 })
 
+export const fetchGetAllComments = createAsyncThunk('/comments/fetchAllComments', async() => {
+    const data = await axios.get('/comments/');
+    return data.data
+})
+
 export interface commentsProps{
     comments:{
         items: CommentsProps[],
@@ -52,6 +57,14 @@ export const commentsSlice = createSlice({
                 state.comments.status = "loading"
             })
             .addCase(fetchGetComments.fulfilled, (state, action) =>{
+                state.comments.status = "loaded",
+                state.comments.items = action.payload
+            })
+
+            .addCase(fetchGetAllComments.pending, (state) =>{
+                state.comments.status = "loading"
+            })
+            .addCase(fetchGetAllComments.fulfilled, (state, action) =>{
                 state.comments.status = "loaded",
                 state.comments.items = action.payload
             })

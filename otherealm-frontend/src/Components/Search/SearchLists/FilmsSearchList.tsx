@@ -16,8 +16,6 @@ export const FilmsSearchList = () => {
     const totalMediaPage = useAppSelector(state => state.state.totalMediaPage)
     const filmsLoadingStatus = useAppSelector(state => state.filmData.filmsLoadingStatus)
 
-    console.log(filmResult);
-
     if (filmsLoadingStatus === 'loading') {
         return <CircularProgress />
     }
@@ -37,7 +35,7 @@ export const FilmsSearchList = () => {
         <div className="searchResult">
             <div className="searchResultItems">
                 {filmResult !== undefined && filmResult.map((item) => (
-                    <ItemCard itemPoster={item.poster?.url ? item.poster.url : '../src/assets/img/noImg.png'} itemTitle={item.name} id={item.id} key={item.id} itemType={item.type} itemAltenativeTitle={item.alternativeName} />
+                    <ItemCard itemPoster={item.poster?.url ? item.poster.url : 'https://i.ibb.co/tbwz7KG/noImg.png'} itemTitle={item.name} id={item.id} key={item.id} itemType={item.type} itemAltenativeTitle={item.alternativeName} />
                 ))}
             </div>
             <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(_event, value) => {

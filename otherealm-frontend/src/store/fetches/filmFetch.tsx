@@ -4,7 +4,6 @@ export const filmFetch = createAsyncThunk(
     'filmData/filmFetch',
     async ({ searchTitle, currentMediaPage, kpToken } : { searchTitle: string, currentMediaPage: number, kpToken: string },) => {
         let fetchURL = `https://api.kinopoisk.dev/v1.4/movie/search?page=${currentMediaPage}&limit=20&query=${searchTitle}`
-        console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',
             headers: {
@@ -22,7 +21,6 @@ export const filmItemFetch = createAsyncThunk(
     'filmData/filmItemFetch',
     async ({ paramsId, token } : { paramsId: string, token: string },) => {
         let fetchURL = `https://api.kinopoisk.dev/v1.4/movie/${paramsId}`
-        console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',
             headers: {

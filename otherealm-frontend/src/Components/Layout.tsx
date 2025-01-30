@@ -7,6 +7,7 @@ import React from "react"
 import { fetchAuthMe } from "../store/auth"
 import { useAppDispatch } from "../store/hooks"
 import { Header } from "./Header"
+import { Footer } from "./Footer"
 
 
 
@@ -20,11 +21,15 @@ export const Layout = () => {
     }, [])
 
     // console.log(selectIsAuth);
-    
+
     return (
         <ThemeProvider theme={layoutTheme}>
             <Header />
-            <Outlet />
+            <div style={{padding: '2rem'}}>
+                <Outlet />
+            </div>
+
+            <Footer />
         </ThemeProvider>
     )
 }

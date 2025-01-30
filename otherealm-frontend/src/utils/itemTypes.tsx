@@ -19,8 +19,11 @@ export const sections: objectProps = {
     "follows": "подписки"
 }
 
-
-
+export const adminSections: objectProps = {
+    "posts": "посты",
+    "comments": "комментарии",
+    "discusses": "обсуждения"
+}
 
 export const divideItems: objectProps = {
     "буду смотреть": "буду смотреть ",
@@ -29,7 +32,7 @@ export const divideItems: objectProps = {
 
 
 export const searchToggleItems: objectProps = {
-    "cinema": "поиск по фильмам/сериалам/мультфильмам/аниме",
+    "cinema": "поиск по фильмам / сериалам / мультфильмам / аниме",
     "games": "поиск по играм",
     "books": "поиск по книгам"
 }
@@ -38,3 +41,5 @@ export const searchTypes: objectProps = {
     "media": "поиск по медиа",
     "users": "поиск пользователей"
 }
+
+export const searchExceptions = ["hentai", "henta", "hent", "hen", "futanari", "futanar", "futana", "futan","futa", "furry", "furr", "dick", "vagina", "boobs", "boob", "booby", "booba", "sex", "sexy", "sexual"] 

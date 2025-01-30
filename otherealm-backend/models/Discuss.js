@@ -7,7 +7,6 @@ const DiscussSchema = new mongoose.Schema({
     },
     text:{
         type: String,
-        required: true,
     },
     viewsCount: {
         type: Number,
@@ -20,6 +19,10 @@ const DiscussSchema = new mongoose.Schema({
         required: true,
     },
     itemId: {
+        type: String,
+        required: true
+    },
+    itemTag: {
         type: String,
         required: true
     },

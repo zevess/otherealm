@@ -4,7 +4,7 @@ import { SearchResult } from "./SearchResultList"
 import { FC } from "react"
 import { searchToggleItems } from "../../utils/itemTypes"
 import { handleChange } from "../../utils/handleChange"
-import { InputText } from "../InputText"
+import { InputText } from "../../utils/InputText"
 
 interface MediaSearchProps {
     downSearchAlignment: string,
@@ -30,7 +30,8 @@ export const MediaSearch: FC<MediaSearchProps> = ({ setDownSearchAlignment, down
                     <a className="searchSourceLink" href="https://developers.google.com/books?hl=ru">developers.google.com/books</a>
                 </Box>
                 <p className="searchSourceText">соответственно</p>
-                <p className="searchSourceText">Результаты могут отличаться от ожидаемых.</p>
+                <p className="searchSourceText">Результаты могут <u><b>отличаться от ожидаемых.</b></u></p>
+                {/* <p className="searchSourceText">Возможно отображение непристойного контента при специфических запросах.</p> */}
                 <p className="searchSourceText">Для получения более точных вводите полные названия на оригинальном языке.</p>
             </div>
 

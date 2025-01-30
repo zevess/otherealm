@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import axios from '../../axios'
-import { PopupWithTrigger } from "../Popup";
+import { PopupWithTrigger } from "../../utils/Popup";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { addFavourites, clearFavourite } from "../../store/favourite";
 
@@ -14,44 +14,50 @@ export const AddToSection = () => {
     const parts = currentUrl.split('/');
     const itemType = (parts.slice(-2))[0];
 
-    const itemTitle = useAppSelector((state) =>{
-        if (itemType == 'game'){
+    const itemTitle = useAppSelector((state) => {
+        if (itemType == 'game') {
             return state.gameData.currentGameItem?.name
         }
-        else if ((itemType == ('movie') ||(itemType == ('tv-series'))  || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')) )){
+        else if ((itemType == ('movie') || (itemType == ('tv-series')) || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')))) {
             return state.filmData.currentFilmItem?.name
         }
-        else if(itemType == 'book'){
+        else if (itemType == 'book') {
             return state.bookData.currentBookItem?.volumeInfo?.title
         }
     });
-    const itemBackgroundImage = useAppSelector((state) =>{
-        if (itemType == 'game'){
+
+    const itemBackgroundImage = useAppSelector((state) => {
+        if (itemType == 'game') {
             return state.gameData.currentGameItem?.background_image
         }
-        else if ((itemType == ('movie') ||(itemType == ('tv-series'))  || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')) )){
-           return state.filmData.currentFilmItem?.poster?.url
+        else if ((itemType == ('movie') || (itemType == ('tv-series')) || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')))) {
+            return state.filmData.currentFilmItem?.poster?.url
         }
-        else if(itemType == 'book'){
+        else if (itemType == 'book') {
             return state.bookData.currentBookItem?.volumeInfo?.imageLinks?.thumbnail
         }
-    } )
-    const itemId = useAppSelector((state) =>{
-        if (itemType == 'game'){
+    })
+
+    const itemId = useAppSelector((state) => {
+        if (itemType == 'game') {
             return state.gameData.currentGameItem?.id
         }
-        else if ((itemType == ('movie') ||(itemType == ('tv-series'))  || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')) )){
+        else if ((itemType == ('movie') || (itemType == ('tv-series')) || (itemType == ('cartoon')) || (itemType == ('animated-series')) || (itemType == ('anime')))) {
             return state.filmData.currentFilmItem?.id
         }
-        else if(itemType == 'book'){
+        else if (itemType == 'book') {
             return state.bookData.currentBookItem?.id
         }
-    } );
-    
+    });
+
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const favourites = useAppSelector((state) => state.favouriteData.favourites.items);
-    // console.log(favourites)
+    const userNick = (useAppSelector((state) => state.authData.data?.nick));
+    const isAuth = useAppSelector((state) => state.authData.data);
     
+
+    const favourites = useAppSelector((state) => state.favouriteData.favourites.items);
+
+
     const [favouriteArr, setFavouriteArr] = React.useState<any>({});
 
     favourites.forEach((item: any) => {
@@ -61,21 +67,18 @@ export const AddToSection = () => {
 
     const [arrFavourite, setArrFavourite] = React.useState<any>(favouriteArr);
 
-    React.useEffect(() =>{
+    React.useEffect(() => {
         if (userId !== undefined) {
             axios.get(`/favourite/${userId}`).then(res => {
                 dispatch(addFavourites(res.data));
             })
         }
-        // .catch(err => {
-        //     console.warn(err);
-        //     alert('ошибка при получении разделов')
-        // })
+
         return () => {
             dispatch(clearFavourite());
         }
     }, [])
-    
+
     const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const { checked, value, id } = event.target;
         setArrFavourite((prevState: any) => {
@@ -91,9 +94,9 @@ export const AddToSection = () => {
 
             if (checked) {
                 await axios.patch(`/favourite/add/${id}`, fields);
-            } 
+            }
 
-            if(!checked){
+            if (!checked) {
                 await axios.patch(`/favourite/remove/${id}`, fields);
             }
 
@@ -102,11 +105,18 @@ export const AddToSection = () => {
             alert('ошибка при добавлении в раздел')
         }
     }
-    // console.log(favouriteArr);
 
-    return (
+
+    if(isAuth) return (
         <PopupWithTrigger id="popup-with-portal" buttonLabel="ДОБАВИТЬ В РАЗДЕЛ">
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                {favourites.length == 0 && (
+                    <>
+                        <span>списки отсутствуют.</span>
+                        <span>создайте списки в <a href={`/profile/${userNick}`}>профиле</a></span>
+                    </>
+
+                )}
                 <FormGroup>
                     {(arrFavourite !== undefined) && favourites.map((items: any) => (
                         <FormControlLabel key={items._id} control={<Checkbox key={items._id} checked={arrFavourite[items.title].checked} id={items._id} value={items.title} onChange={onChange} />} label={items.title} />

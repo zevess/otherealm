@@ -7,11 +7,10 @@ export const createDiscuss = async (req, res) => {
             text: req.body.text,
             imageUrl: req.body.imageUrl,
             itemId: req.body.itemId,
+            itemTag: req.body.itemTag,
             user: req.userId
         })
-
         const discuss = await doc.save();
-
         res.json(discuss)
 
     } catch (err) {
@@ -21,16 +20,6 @@ export const createDiscuss = async (req, res) => {
         })
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 export const getDiscuss = async (req, res) => {
@@ -56,21 +45,24 @@ export const getDiscuss = async (req, res) => {
     }
 }
 
+export const getAllDiscuss = async(req,res) =>{
+    try{
+        const discuss = await DiscussModel.find().populate('user').exec();
+        if (discuss.length === 0){
+            return res.status(404).json({
+                message: "обсуждения не найдены"
+            })
+        }
 
+        res.json(discuss);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: 'не удалось получить обсуждения'
+        })
+    }
+}
 
 export const getOneDiscuss = async (req, res) => {
     try {

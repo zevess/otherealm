@@ -1,5 +1,5 @@
 import React from "react"
-import { InputText } from "../InputText"
+import { InputText } from "../../utils/InputText"
 import { useAppDispatch } from "../../store/hooks"
 import { fetchUsers } from "../../store/users"
 import { useAppSelector } from "../../store"
@@ -11,8 +11,6 @@ export const UserSearch = () => {
     const foundUsers = useAppSelector(state => state.usersData.users.items)
 
     const [searchUsername, setSearchUsername] = React.useState('')
-
-
 
     return (
         <div className="userSearch">

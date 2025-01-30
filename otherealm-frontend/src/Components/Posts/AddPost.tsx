@@ -3,18 +3,14 @@ import React from "react";
 import { SimpleMdeReact } from 'react-simplemde-editor'
 import { Options } from 'easymde';
 import "easymde/dist/easymde.min.css";
-import { ColorButton, ColorButtonBlue } from "../CustomButton";
+import { ColorButton, ColorButtonBlue } from "../../utils/CustomButton";
 import axios from '../../axios'
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
 import { useAppSelector } from "../../store/hooks";
 
 
-
-
 export const AddPost = () => {
-
 
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
@@ -23,10 +19,8 @@ export const AddPost = () => {
 
     const inputFileRef = React.useRef<any>(null);
 
-    const userNick = useAppSelector((state) => state.authData.data?.nick)
-    // const selectedUserNick = useAppSelector((state) => state.usersData.currentUser.items?.nick)
-    // const userId = (useAppSelector((state) => state.authData.data?._id));
-    // const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
+    const authData = useAppSelector((state) => state.authData.data)
+    const adminId = useAppSelector((state) => state.state.adminId)
 
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
@@ -35,15 +29,15 @@ export const AddPost = () => {
 
     const { postId } = useParams();
     const isEditing = Boolean(postId)
+    console.log(isEditing)
 
-    const currentUrl = window.location.href;
-    const parts = currentUrl.split('/');
-    console.log(parts)
+    // const currentUrl = window.location.href;
+    // const parts = currentUrl.split('/');
+
 
     React.useEffect(() => {
-        if (postId !== undefined) {
+        if (isEditing && (postId !== undefined)) {
             axios.get(`/post/${postId}`).then((res): any => {
-
                 window.localStorage.setItem('currentUser', res.data.user._id)
                 setTitle(res.data.title);
                 setText(res.data.text);
@@ -54,14 +48,19 @@ export const AddPost = () => {
     }, [postId])
 
 
-    if (isSameUser == false) {
+    if (isEditing && ((isSameUser == false) && (authId !== adminId))) {
         navigate(`/post/${postId}`);
     }
+
+    if (authData == null){
+        navigate(`/post/${postId}`);
+    }
+    
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
     }, []);
 
-        
+
     const autofocusNoSpellcheckerOptions = React.useMemo<Options>(() => {
         return {
             spellChecker: false,
@@ -72,10 +71,10 @@ export const AddPost = () => {
             autosave: {
                 enabled: true,
                 delay: 1000,
-                uniqueId: 'myUniqueID' 
+                uniqueId: 'myUniqueID'
             },
             toolbar: [
-                "bold", "strikethrough", {
+                "bold", {
                     name: "underline",
                     action: function (editor: any) {
                         var cm = editor.codemirror;
@@ -96,9 +95,17 @@ export const AddPost = () => {
         const formData = new FormData();
         const file = event.target.files[0];
         formData.append('image', file);
-        const { data } = await axios.post('/upload', formData)
-        console.log(data.url);
-        setImageUrl(data.url);
+        console.log(formData);
+        try {
+            const { data } = await axios.post(`/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            setImageUrl(data.data.url)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const onSubmit = async () => {
@@ -120,7 +127,8 @@ export const AddPost = () => {
         try {
             if (window.confirm('вы уверены что ходите удалить пост?')) {
                 await axios.delete(`/post/${postId}`)
-                navigate(`/profile/${userNick}`);
+                // navigate(`/profile/${userNick}`);
+                navigate(-1);
             }
 
         } catch (err) {
@@ -130,18 +138,14 @@ export const AddPost = () => {
     }
 
     return (
-
-
-
         <div className="addPostWrapper">
-
             <div className="addPost">
                 <div className="addPostInputs">
                     <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
                     <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>
                     {imageUrl &&
                         <>
-                            <Box component={'img'} maxWidth={'100%'} src={`${import.meta.env.VITE_API_URL}${imageUrl}`}>
+                            <Box component={'img'} maxWidth={'100%'} src={`${imageUrl}`}>
                             </Box>
                             <IconButton onClick={() => setImageUrl('')} >
                                 <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
@@ -164,16 +168,9 @@ export const AddPost = () => {
                     <ColorButtonBlue onClick={() => onSubmit()} disabled={!Boolean(title.length >= 5)} size="large">
                         {isEditing ? 'сохранить' : 'отправить'}
                     </ColorButtonBlue>
-
                 </div>
-
             </div>
         </div>
 
-
     )
 }
-
-{/* <ColorButtonBlue sx={{height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px'}} onClick={()=>navigate(`/profile/${selectedUserNick}`)}>
-                <ArrowBackIcon />
-            </ColorButtonBlue> */}

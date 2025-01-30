@@ -21,7 +21,24 @@ export const createPost = async (req, res) => {
     }
 }
 
+export const getAllPosts = async(req,res) =>{
+    try{
+        const post = await PostModel.find().populate('user').exec();
+        if (post.length === 0){
+            return res.status(404).json({
+                message: "посты не найдены"
+            })
+        }
 
+        res.json(post);
+
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: 'не удалось получить посты'
+        })
+    }
+}
 
 export const getPostsByUser = async (req, res) => {
     try {

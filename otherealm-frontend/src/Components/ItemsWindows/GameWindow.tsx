@@ -56,7 +56,7 @@ export const GameWindow = () => {
 
                 <div className="searchItemContent" >
                     <div className="searchItemContent__left">
-                        <img className="searchItemPoster" src={`${currentGameItem?.background_image}`} alt="" />
+                        <img className="searchItemPoster" src={`${currentGameItem?.background_image}` ? `${currentGameItem?.background_image}` : 'https://i.ibb.co/tbwz7KG/noImg.png'} alt="" />
                         <AddToSection />
                     </div>
 

@@ -1,7 +1,5 @@
 import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
-
 import React from "react";
-
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection, } from "./DiscussWindow/DiscussSection";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
@@ -33,7 +31,7 @@ export const FilmWindow = () => {
     let fontSize;
     if (title.length > 100) fontSize = '20px';
 
-    console.log(`${currentFilmItem?.type}`)
+    
 
     if (currentFilmItem == undefined) {
         return <CircularProgress />
@@ -42,7 +40,7 @@ export const FilmWindow = () => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
-    console.log(postId);
+    
 
     window.localStorage.setItem('currentObjectTitle', `${currentFilmItem.name}`)
 
@@ -53,7 +51,7 @@ export const FilmWindow = () => {
 
                 <div className="searchItemContent" >
                     <div className="searchItemContent__left">
-                        <img className="searchItemPoster" src={`${currentFilmItem.poster?.url}`} alt="" />
+                        <img className="searchItemPoster" src={`${currentFilmItem.poster?.url}` ? `${currentFilmItem.poster?.url}`: 'https://i.ibb.co/tbwz7KG/noImg.png'} alt="" />
                         <AddToSection />
                     </div>
 
@@ -72,7 +70,11 @@ export const FilmWindow = () => {
                                 <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
                             ))}
                         </div>
-                        <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5" >год: {currentFilmItem.year}</Typography>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} paddingRight={'10px'} paddingBottom={'15px'} variant="h5" >год: </Typography>
+                            <Typography paddingRight={'10px'} variant="h5"  className="detailsItemText">{currentFilmItem.year}</Typography>
+                        </div>
+                        
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">жанры: </Typography>
                             {currentFilmItem.genres?.map((genre, index) => (
@@ -82,13 +84,13 @@ export const FilmWindow = () => {
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText" >режиссер: </Typography>
                             {currentFilmItem.persons?.map((person, index) => (
-                                person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{person.name}</Typography>
+                                person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{person.name}, </Typography>
 
                             ))}
                         </div>
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">актеры: </Typography>
-                            {currentFilmItem.persons?.map((person, index) => (
+                            {currentFilmItem.persons?.slice(0, 16).map((person, index) => (
                                 (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{person.name},</Typography>
                             ))}
                         </div>

@@ -73,7 +73,7 @@ const PopupBody = styled('div')(
       ? `0px 4px 8px rgb(0 0 0 / 0.7)`
       : `0px 4px 8px rgb(0 0 0 / 0.1)`
   };
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   font-size: 0.875rem;
 `,
 );

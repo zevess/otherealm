@@ -6,8 +6,6 @@ import { Profile } from './Components/Profile/Profile'
 import { GameWindow } from './Components/ItemsWindows/GameWindow'
 import { FilmWindow } from './Components/ItemsWindows/FilmWindow'
 import { BookWindow } from './Components/ItemsWindows/BookWindow'
-
-import { Authorize } from './Components/RegistrationPage/Registration'
 import { useAppDispatch } from './store/hooks'
 import React from 'react'
 import { fetchAuthMe } from './store/auth'
@@ -18,13 +16,15 @@ import { AddPost } from './Components/Posts/AddPost'
 import { PostsFeed } from './Components/Posts/PostsFeed'
 import { AddDiscuss } from './Components/ItemsWindows/DiscussWindow/AddDiscuss'
 import { DiscussItem } from './Components/ItemsWindows/DiscussWindow/DiscussItem'
+import { Authorize } from './Components/RegistrationPage/Authorize'
+import { AdminPanel } from './Components/AdminWindow/AdminPanel'
 
 function App() {
   const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(fetchAuthMe())
   }, [])
-
+  
   return (
     <>
       <Routes>
@@ -59,9 +59,7 @@ function App() {
           <Route path='/item/game/:id/discuss/:discussId/edit' element={<AddDiscuss />} />
           <Route path='/item/book/:id/discuss/:discussId/edit' element={<AddDiscuss />} />
 
-
           <Route path='/discuss/:itemId/:discussId/edit' element={<AddDiscuss />} />
-          
           
           <Route path='/item/movie/:id/discuss/:discussId' element={<DiscussItem />} />
           <Route path='/item/anime/:id/discuss/:discussId' element={<DiscussItem />} />
@@ -80,6 +78,9 @@ function App() {
 
           <Route path='/auth' element={<Authorize />} />
           <Route path='/error' element={<ErrorBoundary />} />
+
+          <Route path='/admin' element={<AdminPanel/>}/>
+
         </Route>
       </Routes>
     </>

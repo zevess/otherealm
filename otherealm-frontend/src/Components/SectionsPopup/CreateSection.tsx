@@ -1,5 +1,5 @@
 import { Box, IconButton, TextField } from "@mui/material"
-import { PopupWithTrigger } from "../Popup.tsx"
+import { PopupWithTrigger } from "../../utils/Popup.tsx"
 import React, { FC } from "react"
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../axios.ts'

@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Otherealm-Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend интернет-портала Otherealm
 
-Currently, two official plugins are available:
+ ### Для запуска нужно склонировать оба репозитория (Frontend и Backend) в одну папку
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+  git clone https://github.com/zevess/otherealm-frontend
+  git clone https://github.com/zevess/otherealm-backend
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Запуск Otherealm-Backend
+
+- После клонирования репозиториев выполнить следующие команды:
+```
+  cd otherealm-backend
+  npm install
+  npm run start:dev
+```
+- Если в терминале появлись сообщения "server ok" "db ok", значит Backend запустился
+
+- Теперь перейти в папку выше
+```
+  cd ..
+```
+- Далее нужно запустить Frontend
+
+## Запуск Otherealm-Frontend
+
+```
+  cd otherealm-frontend
+  npm install
+  npm run build
+  npm run preview
+```
+- Затем перейти по адресу, появившемся в терминале 

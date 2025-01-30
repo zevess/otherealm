@@ -7,6 +7,7 @@ interface initialStateProps {
     gbToken: string
     bookResult?: bookResultProps,
     currentBookItem?: currentBookProps,
+    currentBookItemLoadingStatus?: string, 
     booksLoadingStatus?: string,
 }
 
@@ -33,15 +34,15 @@ export const bookDataSlice = createSlice({
                 state.bookResult = action.payload
             })
             .addCase(booksFetch.rejected, (state) => {
-                console.log("Rejected");
+                
                 state.booksLoadingStatus = 'rejected'
             })
             .addCase(bookItemFetch.fulfilled, (state, action: PayloadAction<currentBookProps>) => {
-                console.log("Successfully");
+                state.currentBookItemLoadingStatus = 'done'
                 state.currentBookItem = action.payload
             })
-            .addCase(bookItemFetch.rejected, () => {
-                console.log("Rejected");
+            .addCase(bookItemFetch.rejected, (state) => {
+                state.currentBookItemLoadingStatus = 'rejected'
             })
     }
 })

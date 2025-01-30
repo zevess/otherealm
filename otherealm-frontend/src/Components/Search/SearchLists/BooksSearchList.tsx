@@ -37,7 +37,7 @@ export const BooksSearchList = () => {
         <div className="searchResult">
             <div className="searchResultItems">
                 {bookResult !== undefined && bookResult.map((item: any) => (
-                    <ItemCard itemPoster={item?.volumeInfo?.imageLinks?.thumbnail ? item?.volumeInfo?.imageLinks?.thumbnail : '../src/assets/img/noImg.png'} itemTitle={item?.volumeInfo?.title} id={item?.id} key={item?.id} itemType="book" itemAltenativeTitle={item.alternativeName} />
+                    <ItemCard itemPoster={item?.volumeInfo?.imageLinks?.thumbnail ? item?.volumeInfo?.imageLinks?.thumbnail : 'https://i.ibb.co/tbwz7KG/noImg.png'} itemTitle={item?.volumeInfo?.title} id={item?.id} key={item?.id} itemType="book" itemAltenativeTitle={item.alternativeName} />
                 ))}
             </div>
             <Pagination page={currentBookPage} count={4} onChange={(_event, value) => {
