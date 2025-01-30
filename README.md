@@ -18,12 +18,12 @@ git clone https://github.com/zevess/otherealm
 To run the project, two terminals are required.
 In the first terminal to run Backend **Currently NOT WORKING** :
 ```
-cd otherealm-frontend
+cd otherealm-backend
 npm run start
 ```
 In the second terminal to run Frontend:
 ```
-cd otherealm-backend
+cd otherealm-frontend
 npm run dev
 ```
 Then open the created *localhost:3000*
