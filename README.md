@@ -7,7 +7,7 @@ Social network portal with the following functions:
 
 Deployed on: https://otherealm.vercel.app/ .
 
-MERN stack.
+MERN stack (MongoDB, Express, React, Node.js).
 
 **The Backend is currently NOT WORKING due to the termination of MongoDB operations in the Russian Federation**.
 
